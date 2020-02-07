@@ -8,13 +8,13 @@ public class hw_1 {
         return an array consisting of all the even elements of A, followed by all the odd elements of A.
         Link: https://leetcode.com/problems/sort-array-by-parity/
     */
-    public int[] sortArrayByParity(int[] A){
+    public int[] sortArrayByParity(int[] A) {
         int[] result = new int[A.length];
         int evenIndex = 0;
-        int oddIndex = A.length -  1;
+        int oddIndex = A.length - 1;
 
-        for (int i = 0; i < A.length; i++){
-            if (A[i] % 2 == 0){
+        for (int i = 0; i < A.length; i++) {
+            if (A[i] % 2 == 0) {
                 result[evenIndex] = A[i];
                 evenIndex++;
             } else {
@@ -34,8 +34,8 @@ public class hw_1 {
         int C = A.length;
         int[][] ans = new int[R][C];
 
-        for (int i = 0; i < R; i++){
-            for (int j = 0; j < C; j++){
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
                 ans[i][j] = A[j][i];
             }
         }
@@ -56,8 +56,8 @@ public class hw_1 {
 
         int R = A[0].length;
 
-        for (int[] row: A){
-            for (int j = 0; j < (R + 1)/2; j++){
+        for (int[] row : A) {
+            for (int j = 0; j < (R + 1) / 2; j++) {
                 int tmp = row[j] ^ 1;
                 row[j] = row[R - 1 - j] ^ 1;
                 row[R - 1 - j] = tmp;
@@ -72,7 +72,7 @@ public class hw_1 {
         Link: https://leetcode.com/problems/reverse-string/
      */
     public void reverseString(char[] s) {
-        for (int i = 0; i < s.length/2; i++){
+        for (int i = 0; i < s.length / 2; i++) {
             char tmp = s[i];
             s[i] = s[s.length - 1 - i];
             s[s.length - 1 - i] = tmp;
@@ -83,13 +83,13 @@ public class hw_1 {
         Link: https://leetcode.com/problems/detect-capital/
      */
     public boolean detectCapitalUse(String word) {
-        if (word.toUpperCase() == word || word.length() == 1){
+        if (word.toUpperCase() == word || word.length() == 1) {
             return true;
         }
 
         int index = 1;
 
-        for (int i = 0; i < word.length(); i++){
+        for (int i = 0; i < word.length(); i++) {
             char firstChar = word.charAt(0);
             boolean isUpper = Character.isUpperCase(firstChar);
 
@@ -99,10 +99,38 @@ public class hw_1 {
                 return false;
             }
 
-            if (index < word.length() - 1){
+            if (index < word.length() - 1) {
                 index++;
             }
 
+        }
+
+        return true;
+    }
+
+    /*
+        Link: https://leetcode.com/problems/valid-palindrome/
+    */
+    public boolean isPalindrome(String s) {
+        int i = 0;
+        int j = s.length() - 1;
+        String loCaseS = s.toLowerCase();
+
+        while (i < j) {
+            while (i < j && !Character.isLetterOrDigit(loCaseS.charAt(i))) {
+                i++;
+            }
+
+            while (i < j && !Character.isLetterOrDigit(loCaseS.charAt(j))) {
+                j--;
+            }
+
+            if (i < j && loCaseS.charAt(i) != loCaseS.charAt(j)) {
+                return false;
+            }
+
+            i++;
+            j--;
         }
 
         return true;

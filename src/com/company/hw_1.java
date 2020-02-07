@@ -1,4 +1,5 @@
 package com.company;
+import java.util.*;
 
 public class hw_1 {
 
@@ -134,5 +135,43 @@ public class hw_1 {
         }
 
         return true;
+    }
+
+    //---------------------------------------------- Map or Sets -------------------------------------------------------
+    public boolean isAnagram(String s, String t) {
+
+        HashMap<Character, Integer> mapS = new HashMap<>();
+        HashMap<Character, Integer> mapT = new HashMap<>();
+
+        for (char ch: s.toCharArray()){
+            if (mapS.containsKey(ch)){
+                mapS.put(ch, mapS.get(ch) + 1);
+            } else {
+                mapS.put(ch, 1);
+            }
+        }
+
+        for (char ch: t.toCharArray()){
+            if (mapT.containsKey(ch)){
+                mapT.put(ch, mapT.get(ch) + 1);
+            } else {
+                mapT.put(ch, 1);
+            }
+        }
+
+        return mapS.equals(mapT);
+    }
+
+    public int[] twoSum(int[] nums, int target) {
+
+        for (int i = 0; i < nums.length; i++){
+            for (int j = i + 1; j < nums.length; j++){
+                if (nums[j] == target - nums[i]){
+                    return new int[] {i, j};
+                }
+            }
+        }
+
+        throw new IllegalArgumentException("No two sum solution");
     }
 }

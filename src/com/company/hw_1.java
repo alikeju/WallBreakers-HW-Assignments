@@ -68,6 +68,29 @@ public class hw_1 {
         return A;
     }
 
+    //---------------------------------------------- Basic Math --------------------------------------------------------
+    /*
+        Link: https://leetcode.com/problems/fizz-buzz/
+    */
+
+    public List<String> fizzBuzz(int n) {
+        ArrayList<String> list = new ArrayList<>();
+
+        for (int i = 1; i <= n; i++){
+            if (i % 3 == 0 && i % 5 == 0){
+                list.add("FizzBuzz");
+            } else if (i % 5 == 0){
+                list.add("Buzz");
+            } else if (i % 3 == 0){
+                list.add("Fizz");
+            } else {
+                list.add(Integer.toString(i));
+            }
+        }
+
+        return list;
+    }
+
     //---------------------------------------------- Strings -----------------------------------------------------------
     /*
         Link: https://leetcode.com/problems/reverse-string/
@@ -135,6 +158,29 @@ public class hw_1 {
         }
 
         return true;
+    }
+
+    /*
+        Link: https://leetcode.com/problems/reverse-words-in-a-string-iii/
+     */
+    public String reverseWords(String s) {
+
+        StringBuilder word = new StringBuilder();
+        StringBuilder answer = new StringBuilder();
+
+        for (int i = 0; i < s.length(); i++){
+
+            if (s.charAt(i) != ' '){
+                word.append(s.charAt(i));
+            } else{
+                answer.append(word.reverse());
+                answer.append(" ");
+                word.setLength(0);
+            }
+        }
+
+        answer.append(word.reverse());
+        return answer.toString();
     }
 
     //---------------------------------------------- Map or Sets -------------------------------------------------------

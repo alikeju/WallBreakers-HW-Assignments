@@ -1,5 +1,9 @@
 package com.company;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 public class hw_1 {
 
@@ -76,12 +80,12 @@ public class hw_1 {
     public List<String> fizzBuzz(int n) {
         ArrayList<String> list = new ArrayList<>();
 
-        for (int i = 1; i <= n; i++){
-            if (i % 3 == 0 && i % 5 == 0){
+        for (int i = 1; i <= n; i++) {
+            if (i % 3 == 0 && i % 5 == 0) {
                 list.add("FizzBuzz");
-            } else if (i % 5 == 0){
+            } else if (i % 5 == 0) {
                 list.add("Buzz");
-            } else if (i % 3 == 0){
+            } else if (i % 3 == 0) {
                 list.add("Fizz");
             } else {
                 list.add(Integer.toString(i));
@@ -96,12 +100,12 @@ public class hw_1 {
     */
 
     public boolean isPowerOfTwo(int n) {
-        if (n > 0){
-            while (n % 2 == 0){
-                n = n/2;
+        if (n > 0) {
+            while (n % 2 == 0) {
+                n = n / 2;
             }
 
-            if (n == 1){
+            if (n == 1) {
                 return true;
             }
         }
@@ -186,11 +190,11 @@ public class hw_1 {
         StringBuilder word = new StringBuilder();
         StringBuilder answer = new StringBuilder();
 
-        for (int i = 0; i < s.length(); i++){
+        for (int i = 0; i < s.length(); i++) {
 
-            if (s.charAt(i) != ' '){
+            if (s.charAt(i) != ' ') {
                 word.append(s.charAt(i));
-            } else{
+            } else {
                 answer.append(word.reverse());
                 answer.append(" ");
                 word.setLength(0);
@@ -201,22 +205,64 @@ public class hw_1 {
         return answer.toString();
     }
 
+
+    public String reverseVowels(String s) {
+        HashSet<Character> vowels = new HashSet<>();
+
+        vowels.add('A');
+        vowels.add('a');
+        vowels.add('E');
+        vowels.add('e');
+        vowels.add('I');
+        vowels.add('i');
+        vowels.add('O');
+        vowels.add('o');
+        vowels.add('U');
+        vowels.add('u');
+
+        int sIndex = 0;
+        int eIndex = s.length() - 1;
+
+        char[] c = s.toCharArray();
+
+        while (sIndex < eIndex) {
+            while (sIndex < eIndex && !vowels.contains(c[sIndex])) {
+                sIndex++;
+            }
+
+            while (sIndex < eIndex && !vowels.contains(c[eIndex])) {
+                eIndex--;
+            }
+
+            char tmp = c[sIndex];
+            c[sIndex] = c[eIndex];
+            c[eIndex] = tmp;
+            sIndex++;
+            eIndex--;
+        }
+
+        String ans = new String(c);
+
+        return ans;
+    }
+
+
     //---------------------------------------------- Map or Sets -------------------------------------------------------
     public boolean isAnagram(String s, String t) {
 
         HashMap<Character, Integer> mapS = new HashMap<>();
         HashMap<Character, Integer> mapT = new HashMap<>();
 
-        for (char ch: s.toCharArray()){
-            if (mapS.containsKey(ch)){
+        for (char ch : s.toCharArray()) {
+            if (mapS.containsKey(ch)) {
                 mapS.put(ch, mapS.get(ch) + 1);
             } else {
                 mapS.put(ch, 1);
             }
         }
 
-        for (char ch: t.toCharArray()){
-            if (mapT.containsKey(ch)){
+        for (char ch : t.toCharArray()) {
+            if (mapT.containsKey(ch)) {
                 mapT.put(ch, mapT.get(ch) + 1);
             } else {
                 mapT.put(ch, 1);
@@ -228,10 +274,10 @@ public class hw_1 {
 
     public int[] twoSum(int[] nums, int target) {
 
-        for (int i = 0; i < nums.length; i++){
-            for (int j = i + 1; j < nums.length; j++){
-                if (nums[j] == target - nums[i]){
-                    return new int[] {i, j};
+        for (int i = 0; i < nums.length; i++) {
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[j] == target - nums[i]) {
+                    return new int[]{i, j};
                 }
             }
         }

@@ -1,9 +1,6 @@
 package com.company;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class hw_1 {
 
@@ -128,7 +125,7 @@ public class hw_1 {
     /*
         Link: https://leetcode.com/problems/excel-sheet-column-number/submissions/
     */
-    
+
     public int titleToNumber(String s) {
         int columnNumber = 0;
         int twentysix = 26;
@@ -329,6 +326,19 @@ public class hw_1 {
         return lcp.toString();
     }
 
+    //---------------------------------------------- Bitwise Manipulation ----------------------------------------------
+    public int singleNumber(int[] nums) {
+        HashSet<Integer> set = new HashSet();
+
+        for (int n: nums){
+            if (!set.add(n)){
+                set.remove(n);
+            }
+        }
+
+        Iterator<Integer> it = set.iterator();
+        return it.next();
+    }
 
     //---------------------------------------------- Map or Sets -------------------------------------------------------
     public boolean isAnagram(String s, String t) {

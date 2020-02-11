@@ -113,6 +113,62 @@ public class hw_1 {
         return false;
     }
 
+    public List<Integer> selfDividingNumbers(int left, int right) {
+        List<Integer> self_dividing_nums = new ArrayList<>();
+
+        for (int i = left; i <= right; i++){
+            if (isSelfDividing(i)){
+                self_dividing_nums.add(i);
+            }
+        }
+
+        return self_dividing_nums;
+    }
+
+    /*
+        Link: https://leetcode.com/problems/excel-sheet-column-number/submissions/
+    */
+    
+    public int titleToNumber(String s) {
+        int columnNumber = 0;
+        int twentysix = 26;
+
+        if (s.length() == 1){
+            return (int)s.charAt(0) - 65 + 1;
+        }
+
+        char[] c = s.toCharArray();
+
+        for (int i = c.length - 1; i >= 0; i--) {
+
+            if (i == c.length - 1){
+                columnNumber += (int)s.charAt(i) - 65 + 1;
+
+            } else {
+                columnNumber += twentysix * ((int)s.charAt(i) - 65 + 1);
+                twentysix *= 26;
+            }
+
+        }
+
+        return columnNumber;
+    }
+
+    /*
+        Link: https://leetcode.com/problems/self-dividing-numbers/
+    */
+    public boolean isSelfDividing(int num){
+
+        for (char c: String.valueOf(num).toCharArray()){
+
+            if (c == '0' || num % Character.getNumericValue(c) > 0){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     //---------------------------------------------- Strings -----------------------------------------------------------
     /*
         Link: https://leetcode.com/problems/reverse-string/
@@ -244,6 +300,33 @@ public class hw_1 {
         String ans = new String(c);
 
         return ans;
+    }
+
+    /*
+        Link: https://leetcode.com/problems/longest-common-prefix/
+    */
+    public String longestCommonPrefix(String[] strs) {
+        StringBuilder lcp = new StringBuilder(); //lcp: longestCommonPrefix
+
+        if (strs == null || strs.length == 0){
+            return lcp.toString();
+        }
+
+        int index = 0;
+
+        for (char c: strs[0].toCharArray()){
+
+            for (int i = 1; i < strs.length; i++){
+                if (index >= strs[i].length() || c != strs[i].charAt(index)){
+                    return lcp.toString();
+                }
+            }
+
+            lcp.append(c); //lcp = lcp + c;
+            index++;
+        }
+
+        return lcp.toString();
     }
 
 

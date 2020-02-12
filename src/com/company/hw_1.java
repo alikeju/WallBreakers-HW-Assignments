@@ -110,6 +110,22 @@ public class hw_1 {
         return false;
     }
 
+    /*
+    Link: https://leetcode.com/problems/self-dividing-numbers/
+    Source: https://leetcode.com/problems/self-dividing-numbers/solution/
+*/
+    public boolean isSelfDividing(int num){
+
+        for (char c: String.valueOf(num).toCharArray()){
+
+            if (c == '0' || num % Character.getNumericValue(c) > 0){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public List<Integer> selfDividingNumbers(int left, int right) {
         List<Integer> self_dividing_nums = new ArrayList<>();
 
@@ -121,7 +137,6 @@ public class hw_1 {
 
         return self_dividing_nums;
     }
-
     /*
         Link: https://leetcode.com/problems/excel-sheet-column-number/submissions/
     */
@@ -151,20 +166,6 @@ public class hw_1 {
         return columnNumber;
     }
 
-    /*
-        Link: https://leetcode.com/problems/self-dividing-numbers/
-    */
-    public boolean isSelfDividing(int num){
-
-        for (char c: String.valueOf(num).toCharArray()){
-
-            if (c == '0' || num % Character.getNumericValue(c) > 0){
-                return false;
-            }
-        }
-
-        return true;
-    }
 
     //---------------------------------------------- Strings -----------------------------------------------------------
     /*
@@ -237,6 +238,7 @@ public class hw_1 {
 
     /*
         Link: https://leetcode.com/problems/reverse-words-in-a-string-iii/
+        Source: https://leetcode.com/problems/reverse-words-in-a-string-iii/solution/
      */
     public String reverseWords(String s) {
 
@@ -258,7 +260,9 @@ public class hw_1 {
         return answer.toString();
     }
 
-
+    /*
+        Source:
+     */
     public String reverseVowels(String s) {
         HashSet<Character> vowels = new HashSet<>();
 
@@ -340,6 +344,23 @@ public class hw_1 {
         return it.next();
     }
 
+    /*
+        Link: https://leetcode.com/problems/number-complement/
+        Source: https://www.youtube.com/watch?v=oURSuMY4zSc
+     */
+    public int findComplement(int num) {
+        int result = 0;
+        int power = 1;
+
+        while (num > 0){
+            result += (num % 2 ^ 1) * power;
+            power <<= 1;
+            num >>= 1;
+        }
+
+        return result;
+    }
+
     //---------------------------------------------- Map or Sets -------------------------------------------------------
     public boolean isAnagram(String s, String t) {
 
@@ -365,6 +386,9 @@ public class hw_1 {
         return mapS.equals(mapT);
     }
 
+    /*
+        Source:
+     */
     public int[] twoSum(int[] nums, int target) {
 
         for (int i = 0; i < nums.length; i++) {

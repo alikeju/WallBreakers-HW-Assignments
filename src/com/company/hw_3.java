@@ -38,4 +38,31 @@ public class hw_3 {
 
         return a_pointer;
     }
+
+    /*
+        Problem: https://leetcode.com/problems/valid-anagram/solution/
+     */
+    public boolean isAnagram(String s, String t) {
+
+        HashMap<Character, Integer> mapS = new HashMap<>();
+        HashMap<Character, Integer> mapT = new HashMap<>();
+
+        for (char ch: s.toCharArray()){
+            if (mapS.containsKey(ch)){
+                mapS.put(ch, mapS.get(ch) + 1);
+            } else {
+                mapS.put(ch, 1);
+            }
+        }
+
+        for (char ch: t.toCharArray()){
+            if (mapT.containsKey(ch)){
+                mapT.put(ch, mapT.get(ch) + 1);
+            } else {
+                mapT.put(ch, 1);
+            }
+        }
+
+        return mapS.equals(mapT);
+    }
 }

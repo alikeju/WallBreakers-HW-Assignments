@@ -65,4 +65,43 @@ public class hw_3 {
 
         return mapS.equals(mapT);
     }
+
+    /*
+        Problem: https://leetcode.com/problems/find-all-anagrams-in-a-string/
+        Source: https://leetcode.com/problems/find-all-anagrams-in-a-string/solution/
+     */
+    public List<Integer> findAnagrams(String s, String p) {
+        HashMap<Character, Integer> pMap = new HashMap<>();
+        HashMap<Character, Integer> sMap = new HashMap<>();
+
+        int pL = p.length();
+        int sL = s.length();
+
+        List<Integer> answer  = new ArrayList<>();
+
+        for (int i = 0; i < p.length(); i++){
+            pMap.put(p.charAt(i), pMap.getOrDefault(p.charAt(i), 0) + 1);
+        }
+
+        for (int i = 0; i < s.length(); i++){
+            char c = s.charAt(i);
+
+            sMap.put(c, sMap.getOrDefault(c, 0) + 1);
+
+            if (i >= pL) {
+                c = s.charAt(i - pL);
+                if (sMap.get(c) == 1) {
+                    sMap.remove(c);
+                } else {
+                    sMap.put(c, sMap.get(c) - 1);
+                }
+            }
+
+            if (pMap.equals(sMap)) {
+                answer.add(i - pL + 1);
+            }
+        }
+
+        return answer;
+    }
 }

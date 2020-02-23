@@ -115,4 +115,36 @@ public class hw_3 {
 
         return -1;
     }
+
+    /*
+        Problem: https://leetcode.com/problems/partition-labels/
+        Source: https://leetcode.com/problems/partition-labels/solution/
+     */
+    public List<Integer> partitionLabels(String S) {
+        //get the last seen index for each letter 'a' - 'z'
+        HashMap<Character, Integer> last_seen = new HashMap<>();
+
+        for (int i = 0; i < S.length(); i++){
+            last_seen.put(S.charAt(i), i);
+        }
+
+        List<Integer> ans = new ArrayList<>();
+
+        Integer end = 0, begin = 0;
+
+        for (int i = 0; i < S.length(); i++){
+            Integer index = last_seen.get(S.charAt(i));
+
+            if (index.intValue() > end.intValue()) {
+                end = index;
+            }
+
+            if (i == end.intValue()) {
+                ans.add(end.intValue() - begin.intValue() + 1);
+                begin = i + 1;
+            }
+        }
+
+        return ans;
+    }
 }

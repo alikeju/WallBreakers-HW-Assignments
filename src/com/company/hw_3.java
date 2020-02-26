@@ -191,4 +191,39 @@ public class hw_3 {
 
         return largestNumber;
     }
+
+    /*
+        Problem: https://leetcode.com/problems/merge-intervals/
+        Source: https://www.youtube.com/watch?v=qKczfGUrFY4
+     */
+
+    public int[][] merge(int[][] intervals) {
+        if (intervals.length <= 1) {
+            return intervals;
+        }
+
+        Arrays.sort(intervals, (arr1, arr2) -> Integer.compare(arr1[0], arr2[0]));
+
+        List<int[]> ans = new ArrayList<>();
+        int[] currentInterval = intervals[0];
+        ans.add(currentInterval);
+
+        for (int[] interval: intervals){
+            int currentEndPoint = currentInterval[1];
+            int currentStartPoint = currentInterval[0];
+
+            int nextStartPoint = interval[0];
+            int nextEndPoint = interval[1];
+
+            if (currentEndPoint >= nextStartPoint) {
+                currentInterval[1] = Math.max(currentEndPoint, nextEndPoint);
+            } else {
+                currentInterval = interval;
+                ans.add(currentInterval);
+            }
+        }
+
+        return ans.toArray(new int[ans.size()][]);
+
+    }
 }

@@ -244,7 +244,7 @@ public class hw_3 {
 
         return maxprofit;
     }
-    
+
     /*
         Problem: https://leetcode.com/problems/array-partition-i/
      */
@@ -259,4 +259,40 @@ public class hw_3 {
         return sum;
     }
 
+    /*
+        Problem: https://leetcode.com/problems/lemonade-change/
+     */
+    public boolean lemonadeChange(int[] bills) {
+        int fives = 0;
+        int tens = 0;
+
+        for (int i = 0; i < bills.length; i++){
+            if (bills[i] == 5){
+                fives++;
+            } else if (bills[i] == 10){
+                if (fives == 0){
+                    return false;
+                }
+                fives--;
+                tens++;
+
+            } else {
+                if (tens == 0){
+                    if (fives < 3){
+                        return false;
+                    }
+                    fives -= 3;
+                }
+                else {
+                    if (fives == 0){
+                        return false;
+                    }
+                    tens--;
+                    fives --;
+                }
+            }
+        }
+
+        return true;
+    }
 }

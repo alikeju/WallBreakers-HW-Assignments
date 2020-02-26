@@ -147,4 +147,48 @@ public class hw_3 {
 
         return ans;
     }
+
+    /*
+        Problem: https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/submissions/
+     */
+    public int findMinArrowShots(int[][] points) {
+        if (points.length == 0) return 0;
+
+        Arrays.sort(points, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] o1, int[] o2) {
+                return o1[1] - o2[1];
+            }
+        });
+
+        int[] currentBalloon = points[0];
+        int minArrows = 1;
+
+        for (int[] point: points){
+            int previousBalloonPosition = currentBalloon[1];
+            int nextBalloonPosition = point[0];
+
+            if (nextBalloonPosition > previousBalloonPosition) {
+                minArrows++;
+                currentBalloon = point;
+            }
+        }
+
+        return minArrows;
+    }
+
+    /*
+        Problem: https://leetcode.com/problems/peak-index-in-a-mountain-array/
+     */
+    public int peakIndexInMountainArray(int[] A) {
+        int largestNumber = 0;
+
+        for (int i = 0; i < A.length; i++){
+            if (A[largestNumber] < A[i]){
+                largestNumber = i;
+            }
+        }
+
+        return largestNumber;
+    }
 }

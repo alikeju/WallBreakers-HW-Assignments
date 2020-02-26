@@ -224,6 +224,26 @@ public class hw_3 {
         }
 
         return ans.toArray(new int[ans.size()][]);
-
     }
+
+    /*
+        Problem: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
+        Source: https://leetcode.com/problems/best-time-to-buy-and-sell-stock/solution/
+     */
+    public int maxProfit(int[] prices) {
+        int minprice = Integer.MAX_VALUE;
+        int maxprofit = 0;
+
+        for (int i = 0; i < prices.length; i++){
+            if (prices[i] < minprice){
+                minprice = prices[i];
+            } else if (prices[i] - minprice > maxprofit){
+                maxprofit = prices[i] - minprice;
+            }
+        }
+
+        return maxprofit;
+    }
+
+
 }

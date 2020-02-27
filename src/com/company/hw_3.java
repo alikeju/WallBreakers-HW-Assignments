@@ -295,4 +295,37 @@ public class hw_3 {
 
         return true;
     }
+
+    /*
+        Problem: https://leetcode.com/problems/house-robber-ii/submissions/
+     */
+    public int rob(int[] nums) {
+        if (nums.length == 1) {
+            return nums[0];
+        }
+
+        if (nums.length == 0){
+            return 0;
+        }
+
+        int fPrevMax = 0;
+        int fCurrMax = 0;
+
+        for (int i = 0; i < nums.length - 1; i++){
+            int temp = fCurrMax;
+            fCurrMax = Math.max(fPrevMax + nums[i], fCurrMax);
+            fPrevMax = temp;
+        }
+
+        int sPrevMax = 0;
+        int sCurrMax = 0;
+
+        for (int i = 1; i < nums.length; i++){
+            int temp = sCurrMax;
+            sCurrMax = Math.max(sPrevMax + nums[i], sCurrMax);
+            sPrevMax = temp;
+        }
+
+        return Math.max(fCurrMax, sCurrMax);
+    }
 }

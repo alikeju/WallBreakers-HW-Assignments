@@ -181,15 +181,15 @@ public class hw_3 {
         Problem: https://leetcode.com/problems/peak-index-in-a-mountain-array/
      */
     public int peakIndexInMountainArray(int[] A) {
-        int largestNumber = 0;
+        int largestNumIndex = 0;
 
         for (int i = 0; i < A.length; i++){
-            if (A[largestNumber] < A[i]){
-                largestNumber = i;
+            if (A[largestNumIndex] < A[i]){
+                largestNumIndex = i;
             }
         }
 
-        return largestNumber;
+        return largestNumIndex;
     }
 
     /*

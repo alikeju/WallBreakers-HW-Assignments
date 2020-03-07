@@ -1,5 +1,7 @@
 package com.company;
 import javax.swing.tree.*;
+import java.util.*;
+import javafx.scene.*;
 
 public class hw_5 {
 
@@ -38,4 +40,48 @@ public class hw_5 {
         return sum;
     }
 
+    public List<Integer> postorder(Node root) {
+        Stack<Node> stack = new Stack<>();
+        LinkedList<Integer> output = new LinkedList<>();
+
+        if (root == null) {
+            return output;
+        }
+
+        stack.add(root);
+
+        while (!stack.isEmpty()) {
+            Node node = stack.pop();
+            output.addFirst(node.val);
+
+            for (Node item : node.children) {
+                if (item != null) {
+                    stack.add(item);
+                }
+            }
+        }
+
+        return output;
+    }
+
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        List<Integer> leaves1 = new ArrayList<>();
+        List<Integer> leaves2 = new ArrayList<>();
+
+        dfs(root1, leaves1);
+        dfs(root2, leaves2);
+
+        return leaves1.equals(leaves2);
+    }
+
+    public void dfs(TreeNode node, List<Integer> leafValues) {
+        if (node != null) {
+            if (node.left == null && node.right == null) {
+                leafValues.add(node.val);
+            }
+
+            dfs(node.left, leafValues);
+            dfs(node.right, leafValues);
+        }
+    }
 }

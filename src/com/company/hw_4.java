@@ -227,5 +227,56 @@ public class hw_4 {
         }
     }
 
+    /*
+        First approach
+     */
+    public void rotate(int[] nums1, int k1) {
+        Queue<Integer> q1 = new LinkedList<>();
+        Queue<Integer> q2 = new LinkedList<>();
+
+        for (int i = 0; i < nums1.length; i++){
+            q1.add(nums1[i]);
+        }
+
+        /*
+            Add the last element in q1 and then go from there
+        */
+        for (int i = 0; i < k1; i++){
+            while(q1.size() != 1) {
+                q2.add(q1.remove());
+            }
+
+            while(!q2.isEmpty()) {
+                q1.add(q2.remove());
+            }
+        }
+
+        int index1 = 0;
+        for (Integer item: q1) {
+            nums1[index1] = item;
+            index1++;
+        }
+    }
+
+    //second try
+    public void rotate1(int[] nums, int k) {
+        Queue<Integer> q1 = new LinkedList<>();
+        k %= nums.length;
+
+        for (int i = nums.length - k; i < nums.length; i++){
+            q1.add(nums[i]);
+        }
+
+        for (int i = 0; i < nums.length - k; i++){
+            q1.add(nums[i]);
+        }
+
+        int index = 0;
+        for (Integer item: q1) {
+            nums[index] = item;
+            index++;
+        }
+
+    }
 
 }

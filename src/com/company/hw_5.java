@@ -84,4 +84,97 @@ public class hw_5 {
             dfs(node.right, leafValues);
         }
     }
+
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        int[] c = new int[numCourses]; //in-degrees
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+
+        for (int[] courses: prerequisites) {
+            int course = courses[0], prereqCourse = courses[1];
+            c[course]++;
+            if (!graph.containsKey(prereqCourse)) {
+                graph.put(prereqCourse, new ArrayList());
+            }
+
+            graph.get(prereqCourse).add(course);
+        }
+
+        Queue<Integer> queue = new LinkedList<>();
+        int count = 0;
+
+        //Pick all the vertices with indegree as 0 and add them to the queue
+        for (int i = 0; i < numCourses; i++) {
+            if (c[i] == 0) {
+                queue.offer(i);
+            }
+        }
+
+        while(!queue.isEmpty()) {
+            int course = queue.poll();
+
+            if (graph.containsKey(course)) {
+                for (int neigh: graph.get(course)) {
+                    if (--c[neigh] == 0) {
+                        queue.offer(neigh);
+                    }
+                }
+            }
+
+            count++;
+        }
+
+        return count == numCourses;
+    }
+    
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        int[] c = new int[numCourses]; //in-degrees
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+
+        for (int[] courses: prerequisites) {
+            int course = courses[0], prereqCourse = courses[1];
+            c[course]++;
+            if (!graph.containsKey(prereqCourse)) {
+                graph.put(prereqCourse, new ArrayList());
+            }
+
+            graph.get(prereqCourse).add(course);
+        }
+
+        Queue<Integer> queue = new LinkedList<>();
+
+        for (int i = 0; i < c.length; i++) {
+            if (c[i] == 0) {
+                queue.offer(i);
+            }
+        }
+
+        int count = 0;
+        ArrayList<Integer> topOrder = new ArrayList<>();
+
+        while(!queue.isEmpty()) {
+            int course = queue.poll();
+            topOrder.add(course);
+
+            if (graph.containsKey(course)) {
+                for (int neigh : graph.get(course)) {
+                    if (--c[neigh] == 0) {
+                        queue.offer(neigh);
+                    }
+                }
+            }
+
+            count++;
+        }
+
+        if (count != numCourses) {
+            return new int[]{};
+        }
+
+        int[] courses = new int[numCourses];
+        for (int i = 0; i < topOrder.size(); i++) {
+            courses[i] = topOrder.get(i);
+        }
+
+        return courses;
+    }
 }

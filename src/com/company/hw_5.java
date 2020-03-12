@@ -125,7 +125,7 @@ public class hw_5 {
 
         return count == numCourses;
     }
-    
+
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         int[] c = new int[numCourses]; //in-degrees
         Map<Integer, List<Integer>> graph = new HashMap<>();
@@ -176,5 +176,64 @@ public class hw_5 {
         }
 
         return courses;
+    }
+
+    public String alienOrder(String[] words) {
+        Map<Character, Integer> inDegree = new HashMap<>();
+        Map<Character, List<Character>> graph = new HashMap<>();
+
+        for (String word : words) {
+            for (char c : word.toCharArray()) {
+                graph.putIfAbsent(c, new ArrayList());
+                inDegree.putIfAbsent(c, 0);
+            }
+        }
+
+        for (int i = 0; i < words.length - 1; i++) {
+            int index = 0;
+            while (index < words[i].length() && index < words[i + 1].length()) {
+                char c1 = words[i].charAt(index);
+                char c2 = words[i + 1].charAt(index); //compare two chars with same index
+                if (c1 != c2) {
+                    graph.get(c1).add(c2);
+                    inDegree.put(c2, inDegree.get(c2) + 1);
+                    break;
+                }
+                index++;
+            }
+        }
+
+        Queue<Character> queue = new LinkedList<>();
+
+        for (char c : inDegree.keySet()) {
+            if (inDegree.get(c) == 0) {
+                queue.add(c);
+            }
+        }
+
+        int count = 0;
+        StringBuilder sb = new StringBuilder();
+
+        while(!queue.isEmpty()) {
+            char letter = queue.poll();
+            sb.append(letter);
+
+            if (graph.containsKey(letter)) {
+                for (char neigh: graph.get(letter)) {
+                    inDegree.put(neigh, inDegree.get(neigh) - 1);
+                    if (inDegree.get(neigh) == 0) {
+                        queue.offer(neigh);
+                    }
+                }
+            }
+
+            count++;
+        }
+
+        if (count != graph.size()) {
+            return "";
+        }
+
+        return sb.toString();
     }
 }

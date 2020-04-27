@@ -401,4 +401,34 @@ public class hw_1 {
 
         throw new IllegalArgumentException("No two sum solution");
     }
+
+    public static int minSum(List<Integer> num, int k) {
+        if (num.size() == 0 || num == null) {
+            return 0;
+        }
+
+        int minimumSum = 2147483647, ceiling = 0, i = 0, index = 0;
+        double pick = 0;
+
+        while(i < k && index < num.size()) {
+            pick = num.get(i);
+            ceiling = (int) Math.round(pick/2);
+            num.set(i, ceiling);
+            minimumSum = Math.min(minimumSum, helper(minimumSum, num));
+            i++;
+            index++;
+        }
+        System.out.println("minimumSum: " + minimumSum);
+        return minimumSum;
+    }
+
+    public static int helper(int minimumSum, List<Integer> num) {
+        minimumSum = 0;
+
+        for (int i = 0; i < num.size(); i++) {
+            minimumSum += num.get(i);
+        }
+
+        return minimumSum;
+    }
 }

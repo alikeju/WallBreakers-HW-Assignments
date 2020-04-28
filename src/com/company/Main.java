@@ -70,27 +70,6 @@ public class Main
         return output;
     }
 
-    public static Boolean isCorrect(String coordinate) {
-        // Write your code here
-
-        String leadingSpace = "\\s+.*";
-        String trailingSpace = ".*\\s+";
-
-        boolean leadingMatches = Pattern.matches(leadingSpace, coordinate);
-        boolean trailingMatches = Pattern.matches(trailingSpace, coordinate);
-
-        if (leadingMatches == true || trailingMatches == true) {
-            return false;
-        }
-//        for (int i = 0; i < coordinate.length(); i++) {
-//            System.out.println(leadingMatches);
-//            System.out.println(trailingMatches);
-//
-//        }
-
-        return true;
-    }
-
     public static String compressWord(String word, int k) {
         // Write your code here
         StringBuilder sb = new StringBuilder();
@@ -149,8 +128,6 @@ public class Main
         list.add(7);
         list.add(7);
         list.add(1);
-
-        int output = reduceCapacity(list);
 
         String newWord = compressWord("abbcccb", 3);
         System.out.println("newWord: " + newWord);

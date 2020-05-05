@@ -70,14 +70,24 @@ public class Main
         return output;
     }
 
+    //Blend Challenge
     public static String compressWord(String word, int k) {
         // Write your code here
-        StringBuilder sb = new StringBuilder();
-        sb.append(word);
+        if (word.length() == 0 || word == null) {
+            return "";
+        }
+
+        StringBuilder output = new StringBuilder();
+        output.append(word);
+
+        if (k == 0) {
+            return output.toString();
+        }
+
         int count = 0, nextLetter = 1, currentLetter = 0;
         //abbcccb
-        while (nextLetter < sb.length() && currentLetter < sb.length()) {
-            if (sb.charAt(nextLetter) == sb.charAt(currentLetter)) {
+        while (nextLetter < output.length() && currentLetter < output.length()) {
+            if (output.charAt(nextLetter) == output.charAt(currentLetter)) {
                 count++;
                 nextLetter++;
             } else {
@@ -86,14 +96,14 @@ public class Main
             }
 
             if (count == k) {
-                sb.delete(currentLetter, nextLetter);
+                output.delete(currentLetter, nextLetter);
                 count = 0;
                 nextLetter = 1;
                 currentLetter = 0;
             }
         }
 
-        return sb.toString();
+        return output.toString();
     }
 
     public static int reduceCapacity(List<Integer> model) {
